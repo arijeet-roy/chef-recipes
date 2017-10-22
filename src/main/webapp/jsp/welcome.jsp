@@ -26,6 +26,16 @@
 	<hr size="4" color="gray" />
 	<div class="container-fluid">
         <div class="panel panel-success">
+        <form action="<c:url value="/search" />" method="GET">
+            <INPUT TYPE="radio" name="action" value="name" checked="checked"/>Name
+            <INPUT TYPE="radio" name="action" value="cuisine"/>Cuisine
+			<INPUT TYPE="radio" NAME="action" VALUE="ingredients"/>Ingredients
+			<INPUT TYPE="text" NAME="searchVal" placeholder="Search"/>
+			<INPUT TYPE="submit" VALUE="Search" /> 
+			<INPUT TYPE="submit" VALUE="View All Recipes" /> 
+		</form><br>
+		<button style="width: 25%; font-size:1.1em;" class="btn btn-large btn btn-success btn-lg btn-block" >  
+		                <a style="color:white;" href=recipe>Add a Recipe</a></button><br>
             <div class="panel-heading" align="center">
                 <h4><b><font color="black" style="font-family: fantasy;">Current Recipes</font> </b></h4>
             </div>

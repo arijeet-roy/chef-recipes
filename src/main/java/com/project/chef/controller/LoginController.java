@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -43,6 +44,24 @@ public class LoginController extends WebMvcConfigurerAdapter{
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
+	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public ModelAndView searchRecipe(@RequestParam String action, 
+			@RequestParam String searchVal) {
+		ModelAndView modelAndView = new ModelAndView("welcome");
+		List<Recipe> recipes = null;
+		if(action.equalsIgnoreCase("name")) {
+			recipes = recipeService.fetchRecipesByName(searchVal);
+		}
+		else if(action.equalsIgnoreCase("cuisine")) {
+			recipes = recipeService.fetchRecipesByCuisine(searchVal);
+		}
+		else if(action.equalsIgnoreCase("ingredients")) {
+			recipes = recipeService.fetchRecipesByIngredients(searchVal);
+		}
+		modelAndView.addObject("recipes", recipes);
+		return modelAndView;
+	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {

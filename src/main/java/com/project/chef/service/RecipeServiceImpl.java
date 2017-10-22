@@ -21,4 +21,22 @@ public class RecipeServiceImpl implements RecipeService{
 		return recipeDao.fetchAllRecipes();
 	}
 
+	@Override
+	public List<Recipe> fetchRecipesByName(String val) {
+		// TODO Auto-generated method stub
+		return recipeDao.fetchRecipesByName(val);
+	}
+
+	@Override
+	public List<Recipe> fetchRecipesByCuisine(String val) {
+		// TODO Auto-generated method stub
+		return recipeDao.fetchRecipesByCuisine(val);
+	}
+
+	@Override
+	public List<Recipe> fetchRecipesByIngredients(String val) {
+		// TODO Auto-generated method stub
+		return recipeDao.fetchRecipesByIngredients(val);
+	}
+
 }

@@ -8,4 +8,9 @@ public interface RecipeDao {
 
 	List<Recipe> fetchAllRecipes();
 	
+	List<Recipe> fetchRecipesByName(String val);
+	
+	List<Recipe> fetchRecipesByCuisine(String val);
+
+	List<Recipe> fetchRecipesByIngredients(String val);
 }

@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.project.chef.model.Account;
 import com.project.chef.model.Recipe;
 
 public class RecipeDaoImpl implements RecipeDao{
@@ -26,6 +27,30 @@ public class RecipeDaoImpl implements RecipeDao{
 		List<Recipe> recipes = jdbcTemplate.query(validateQuery, new RecipeMapper());
 		return recipes.size() > 0 ? recipes : null;
 	
+	}
+
+	@Override
+	public List<Recipe> fetchRecipesByName(String val) {
+		// TODO Auto-generated method stub
+		String validateQuery = "select * from recipe where recipeName like '%" + val + "%'";
+		List<Recipe> recipes = jdbcTemplate.query(validateQuery, new RecipeMapper());
+		return recipes.size() > 0 ? recipes : null;
+	}
+
+	@Override
+	public List<Recipe> fetchRecipesByCuisine(String val) {
+		// TODO Auto-generated method stub
+		String validateQuery = "select * from recipe where recipeType like '%" + val + "%'";
+		List<Recipe> recipes = jdbcTemplate.query(validateQuery, new RecipeMapper());
+		return recipes.size() > 0 ? recipes : null;
+	}
+
+	@Override
+	public List<Recipe> fetchRecipesByIngredients(String val) {
+		// TODO Auto-generated method stub
+		String validateQuery = "select * from recipe where ingredients like '%" + val + "%'";
+		List<Recipe> recipes = jdbcTemplate.query(validateQuery, new RecipeMapper());
+		return recipes.size() > 0 ? recipes : null;
 	}
 
 }
