@@ -13,4 +13,6 @@ public interface RecipeDao {
 	List<Recipe> fetchRecipesByCuisine(String val);
 
 	List<Recipe> fetchRecipesByIngredients(String val);
+
+	Void addRecipe(Recipe recipe);
 }

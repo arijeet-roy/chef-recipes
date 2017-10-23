@@ -34,17 +34,16 @@
 			<INPUT TYPE="submit" VALUE="Search" /> 
 			<INPUT TYPE="submit" VALUE="View All Recipes" /> 
 		</form><br>
-		<button style="width: 25%; font-size:1.1em;" class="btn btn-large btn btn-success btn-lg btn-block" >  
-		                <a style="color:white;" href=recipe>Add a Recipe</a></button><br>
+		<form action="<c:url value="/newRecipe" />" method="get">
+			<INPUT TYPE="submit" VALUE="Add new recipe" /> 
+		</form>
+		
             <div class="panel-heading" align="center">
                 <h4><b><font color="black" style="font-family: fantasy;">Current Recipes</font> </b></h4>
             </div>
             <div class="panel-body"align="center">
                   
                 <div class="container " style="margin-top: 10%; margin-bottom: 10%;">
-    
-                        
-                    
                         <div class="panel-body" >
 							<table class="table table-hover">
 								<c:forEach items="${recipes}" var="recipe">

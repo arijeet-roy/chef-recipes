@@ -42,22 +42,21 @@ public class RecipeController extends WebMvcConfigurerAdapter{
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
-	@RequestMapping(value = "/recipe", method = RequestMethod.GET)
+	@RequestMapping(value = "/newRecipe", method = RequestMethod.GET)
 	public ModelAndView showSignUp(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView("recipe");
 		modelAndView.addObject("account", new Account());
+		modelAndView.addObject("recipe", new Recipe());
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/addRecipe", method = RequestMethod.POST)
 	public ModelAndView addAccount(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("account") Account account) {
-		ModelAndView modelAndView = null;
-		accountService.register(account);
-		List<Recipe> recipes = recipeService.fetchAllRecipes();
-		modelAndView = new ModelAndView("welcome");
-		modelAndView.addObject("firstName", account.getFirstName());
-		modelAndView.addObject("recipes", recipes);
+			@ModelAttribute("recipe") Recipe recipe) {
+		ModelAndView modelAndView = new ModelAndView("recipe");
+		modelAndView.addObject("account", new Account());
+		recipeService.addNewRecipe(recipe);
+		modelAndView.addObject("recipe", new Recipe());
 		return modelAndView;
 	}
 

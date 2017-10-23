@@ -22,48 +22,37 @@
                         
                         <div class="panel-heading form-group">
                             <b><font color="white">
-                                Sign up Form</font> </b>
+                                New Recipe</font> </b>
                         </div>
                     
                         <div class="panel-body" >
 
-                        <form:form id="signUpForm" modelAttribute="account" action="signUpProcess" method="post">
+                        <form:form id="newRecipeForm" modelAttribute="recipe" action="addRecipe" method="post">
                             <div class="form-group">
-                                    <form:label for="exampleInputEmail1" path="userName">Username</form:label> 
-                                    <form:input class="form-control" path="userName" name="userName" id="userName" />
+                                    <form:label for="recipeName" path="recipeName">Recipe Name</form:label> 
+                                    <form:input class="form-control" path="recipeName" name="recipeName" id="recipeName" />
                                     
                             </div>
                             <div class="form-group">
-                                    <form:label for="exampleInputPassword1" path="password">Password</form:label>
-                                    <form:password class="form-control" path="password" name="password" id="password" />
+                                    <form:label for="recipeType" path="recipeType">Recipe Type</form:label>
+                                    <form:input class="form-control" path="recipeType" name="recipeType" id="recipeType" />
                             </div>
                             
                             <div class="form-group">
-                                    <form:label path="firstName">First Name</form:label>
-                                    <form:input class="form-control" path="firstName" name="firstName" id="firstName" />
+                                    <form:label path="ingredients">Ingredients</form:label>
+                                    <form:textarea class="form-control" path="ingredients" name="ingredients" id="ingredients" />
                             </div>
                             
                             <div class="form-group">
-                                    <form:label path="lastName">Last Name</form:label>
-                                    <form:input class="form-control" path="lastName" name="lastName" id="lastName" />
+                                    <form:label path="description">Description</form:label>
+                                    <form:textarea class="form-control" path="description" name="description" id="description" />
                             </div>
                             
                             <div class="form-group">
-                                    <form:label path="emailId">Email</form:label>
-                                    <form:input class="form-control" path="emailId" name="emailId" id="emailId" />
+                                    <form:label path="imageUrl">Image Url</form:label>
+                                    <form:input class="form-control" path="imageUrl" name="imageUrl" id="imageUrl" />
                             </div>
-                            
-                            <div class="form-group">
-                                    <form:label path="address">Address</form:label>
-                                    <form:input class="form-control" path="address" name="address" id="address" />
-                            </div>
-                            
-                            <div class="form-group">
-                                    <form:label path="phoneNum">Phone</form:label>
-                                    <form:input class="form-control" path="phoneNum" name="phoneNum" id="phoneNum" />
-                            </div>
-                            
-                                  <form:button style="width: 100%; font-size:1.1em;" class="btn btn-large btn btn-success btn-lg btn-block" id="signUp" name="signUp">Sign up</form:button>                 
+                                  <form:button style="width: 100%; font-size:1.1em;" class="btn btn-large btn btn-success btn-lg btn-block" id="submit" name="Submit">Submit</form:button>                 
                         </form:form>
 
                         </div>

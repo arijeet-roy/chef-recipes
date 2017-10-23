@@ -53,4 +53,12 @@ public class RecipeDaoImpl implements RecipeDao{
 		return recipes.size() > 0 ? recipes : null;
 	}
 
+	public Void addRecipe(Recipe recipe) {
+		String str = "Insert into recipe (recipeName,recipeType,ingredients,description,imageUrl,rating) values('"+
+					recipe.getRecipeName()+"','"+recipe.getRecipeType()+"','"+recipe.getIngredients() +"','"+ recipe.getDescription()
+					+"','"+recipe.getImageUrl()+"',0)";
+		jdbcTemplate.execute(str);
+		return null;
+	}
+
 }

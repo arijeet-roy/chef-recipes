@@ -39,4 +39,11 @@ public class RecipeServiceImpl implements RecipeService{
 		return recipeDao.fetchRecipesByIngredients(val);
 	}
 
+	public void addNewRecipe(Recipe recipe) {
+		 recipeDao.addRecipe(recipe);
+		return;
+	}
+	
+	
+
 }
