@@ -6,6 +6,8 @@ import com.project.chef.model.Recipe;
 
 public interface RecipeDao {
 
+	void addRecipe(Recipe recipe);
+	
 	List<Recipe> fetchAllRecipes();
 	
 	List<Recipe> fetchRecipesByName(String val);

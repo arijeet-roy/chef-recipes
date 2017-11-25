@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -53,10 +54,12 @@ public class SignUpController extends WebMvcConfigurerAdapter{
 	public ModelAndView addAccount(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute("account") Account account) {
 		ModelAndView modelAndView = null;
+		HttpSession session = request.getSession(true);
+		session.setAttribute("sessionName", account.getFirstName());
 		accountService.register(account);
 		List<Recipe> recipes = recipeService.fetchAllRecipes();
 		modelAndView = new ModelAndView("welcome");
-		modelAndView.addObject("firstName", account.getFirstName());
+//		modelAndView.addObject("firstName", account.getFirstName());
 		modelAndView.addObject("recipes", recipes);
 		return modelAndView;
 	}

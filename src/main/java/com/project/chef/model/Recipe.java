@@ -8,7 +8,16 @@ public class Recipe {
 	private String description;
 	private String imageUrl;
 	private int rating;
-	
+	private String userName;
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public Recipe() {
 		// TODO Auto-generated constructor stub
 	}
@@ -64,8 +73,8 @@ public class Recipe {
 	@Override
 	public String toString() {
 		return "Recipe [recipeName=" + recipeName + ", recipeType=" + recipeType + ", ingredients=" + ingredients
-				+ ", description=" + description + ", imageUrl=" + imageUrl + ", rating=" + rating + "]";
+				+ ", description=" + description + ", imageUrl=" + imageUrl + ", rating=" + rating + ", userName="
+				+ userName + "]";
 	}
 
-	
 }

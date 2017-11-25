@@ -7,7 +7,7 @@
 <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 <link rel='stylesheet'
 	href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
-<title>Add a recipe</title>
+<title>Recipe</title>
 </head>
 <body>
 	<br>
@@ -15,7 +15,8 @@
 		<div class="panel panel-success">
 			<div class="panel-heading" align="center">
 				<h4>
-					<b><font color="black" style="font-family: fantasy;">Add Recipe</font> </b>
+					<b><font color="black" style="font-family: fantasy;">View
+							Recipe</font> </b>
 				</h4>
 			</div>
 			<div class="panel-body" align="center">
@@ -35,9 +36,9 @@
 								action="addRecipe" method="post">
 
 								<div class="form-group">
-									<form:label path="recipeName">Recipe name</form:label>
+									<form:label path="recipeName">${recipe.recipeName}</form:label>
 									<form:input class="form-control" path="recipeName"
-										name="recipeName" id="recipeName" />
+										name="recipeName" id="recipeName" value="${recipe.recipeName}" />
 								</div>
 
 								<div class="form-group">
@@ -65,9 +66,21 @@
 										name="imageUrl" id="imageUrl" />
 								</div>
 
+								<div class="form-group">
+									<form:label path="rating">Rating</form:label>
+									<form:select class="form-control" path="rating" name="rating"
+										id="rating">
+										<form:option value="1" label="1" />
+										<form:option value="2" label="2" />
+										<form:option value="3" label="3" />
+										<form:option value="4" label="4" />
+										<form:option value="5" label="5" />
+									</form:select>
+								</div>
+
 								<form:button style="width: 100%; font-size:1.1em;"
 									class="btn btn-large btn btn-success btn-lg btn-block"
-									id="recipe" name="recipe">Add recipe</form:button>
+									id="recipe" name="recipe">Submit Rating</form:button>
 							</form:form>
 
 						</div>

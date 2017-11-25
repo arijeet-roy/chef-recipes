@@ -25,7 +25,9 @@ CREATE TABLE recipe
 		`description`     TEXT,
         `imageUrl`     TEXT,
 		`rating`   int,
+		`userName`  VARCHAR(45) NOT NULL,
 	CONSTRAINT recipeId_pk PRIMARY KEY (`recipeId`) 
+	CONSTRAINT userId_fk FOREIGN KEY (`userName`) REFERENCES accounts(`userName`)
 )
 
 --INSERT INTO accounts VALUES ('arijeet','1234','arijeet', null, null, null, null, null);
@@ -37,7 +39,7 @@ football games, tailgating or for taking along to pot lucks in a slow cooker! Th
 serious crowd-pleaser that is served hot as a dip, spooned over crisp tortilla chips 
 nacho-style, or rolled up in a warm flour tortilla! The heat can be turned up or down 
 with the addition of jalapenos to taste.', 'http://images.media-allrecipes.com/userphotos/720x405/2333962.jpg', 
-5);
+5, 'a');
 
 Insert into recipe (`recipeName`, `recipeType`, `ingredients`, `description`, `imageUrl`, 
 `rating`) values ('Mediterranean Chicken', 'World Cuisine', 
@@ -46,7 +48,7 @@ Insert into recipe (`recipeName`, `recipeType`, `ingredients`, `description`, `i
 American Diabetes Association. Preparation time: 20 minutes. Sauteed chicken simmered in
  a sauce of tomatoes, olives, white wine, garlic, and herbs.', 
 'http://images.media-allrecipes.com/userphotos/720x405/3442434.jpg', 
-4);
+4, 'a');
 
 Insert into recipe (`recipeName`, `recipeType`, `ingredients`, `description`, `imageUrl`, 
 `rating`) values ('Blueberry Sour Cream Coffee Cake', 'Desserts', 
@@ -55,7 +57,7 @@ Insert into recipe (`recipeName`, `recipeType`, `ingredients`, `description`, `i
 she got this recipe from but it was about thirty years ago and has been a family favorite since. 
 The bake time is a bit longer if you''re using frozen berries.', 
 'http://images.media-allrecipes.com/userphotos/720x405/4559321.jpg', 
-5);
+5, 'a');
 
 
 

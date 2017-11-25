@@ -39,4 +39,10 @@ public class RecipeServiceImpl implements RecipeService{
 		return recipeDao.fetchRecipesByIngredients(val);
 	}
 
+	@Override
+	public void addRecipe(Recipe recipe) {
+		// TODO Auto-generated method stub
+		recipeDao.addRecipe(recipe);
+	}
+
 }

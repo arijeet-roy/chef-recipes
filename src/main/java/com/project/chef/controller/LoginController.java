@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -28,7 +29,7 @@ import com.project.chef.service.RecipeService;
 @Configuration
 @ComponentScan(basePackages = { "com.project.chef.controller" })
 @Controller
-public class LoginController extends WebMvcConfigurerAdapter{
+public class LoginController extends WebMvcConfigurerAdapter {
 
 	public LoginController() {
 		// TODO Auto-generated constructor stub
@@ -40,29 +41,26 @@ public class LoginController extends WebMvcConfigurerAdapter{
 	RecipeService recipeService;
 
 	@Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-    }
-	
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+	}
+
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public ModelAndView searchRecipe(@RequestParam String action, 
-			@RequestParam String searchVal) {
+	public ModelAndView searchRecipe(@RequestParam String action, @RequestParam String searchVal) {
 		ModelAndView modelAndView = new ModelAndView("welcome");
 		List<Recipe> recipes = null;
-		if(action.equalsIgnoreCase("name")) {
+		if (action.equalsIgnoreCase("name")) {
 			recipes = recipeService.fetchRecipesByName(searchVal);
-		}
-		else if(action.equalsIgnoreCase("cuisine")) {
+		} else if (action.equalsIgnoreCase("cuisine")) {
 			recipes = recipeService.fetchRecipesByCuisine(searchVal);
-		}
-		else if(action.equalsIgnoreCase("ingredients")) {
+		} else if (action.equalsIgnoreCase("ingredients")) {
 			recipes = recipeService.fetchRecipesByIngredients(searchVal);
 		}
 		modelAndView.addObject("recipes", recipes);
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView("login");
@@ -77,8 +75,10 @@ public class LoginController extends WebMvcConfigurerAdapter{
 		Account account = accountService.validateAccount(login);
 		List<Recipe> recipes = recipeService.fetchAllRecipes();
 		if (null != account) {
+			HttpSession session = request.getSession(true);
+			session.setAttribute("sessionName", account.getFirstName());
 			modelAndView = new ModelAndView("welcome");
-			modelAndView.addObject("firstName", account.getFirstName());
+//			modelAndView.addObject("firstName", account.getFirstName());
 			modelAndView.addObject("recipes", recipes);
 		} else {
 			modelAndView = new ModelAndView("login");

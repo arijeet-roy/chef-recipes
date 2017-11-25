@@ -1,9 +1,11 @@
 package com.project.chef.controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -45,18 +47,34 @@ public class RecipeController extends WebMvcConfigurerAdapter{
 	@RequestMapping(value = "/recipe", method = RequestMethod.GET)
 	public ModelAndView showSignUp(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView("recipe");
-		modelAndView.addObject("account", new Account());
+		modelAndView.addObject("recipe", new Recipe());				
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/viewRecipe", method = RequestMethod.GET)
+	public ModelAndView viewRecipe(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView modelAndView = new ModelAndView("viewRecipe");
+		String recipeName = request.getParameter("recipeName");
+		List<Recipe> recipes = recipeService.fetchAllRecipes();
+		for(Recipe recipe:recipes) {
+			if(recipe.getRecipeName().equalsIgnoreCase(recipeName)) {
+				modelAndView.addObject("recipe", recipe);				
+			}
+		}
+		return modelAndView;
+	}
+	
 	@RequestMapping(value = "/addRecipe", method = RequestMethod.POST)
 	public ModelAndView addAccount(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("account") Account account) {
+			@ModelAttribute("recipe") Recipe recipe) {
 		ModelAndView modelAndView = null;
-		accountService.register(account);
-		List<Recipe> recipes = recipeService.fetchAllRecipes();
+		HttpSession session = request.getSession(true);
+		recipe.setUserName((String)session.getAttribute("sessionName"));
+		recipe.setRating(1);
+		recipeService.addRecipe(recipe);
 		modelAndView = new ModelAndView("welcome");
-		modelAndView.addObject("firstName", account.getFirstName());
+//		modelAndView.addObject("firstName", account.getFirstName());
+		List<Recipe> recipes = recipeService.fetchAllRecipes();
 		modelAndView.addObject("recipes", recipes);
 		return modelAndView;
 	}
