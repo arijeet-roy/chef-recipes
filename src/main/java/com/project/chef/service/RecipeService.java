@@ -15,4 +15,9 @@ public interface RecipeService {
 	List<Recipe> fetchRecipesByCuisine(String val);
 
 	List<Recipe> fetchRecipesByIngredients(String val);
+
+	void updateRecipe(Recipe recipe);
+//	void addNewRecipe(Recipe recipe);
+	
+
 }

@@ -15,4 +15,7 @@ public interface RecipeDao {
 	List<Recipe> fetchRecipesByCuisine(String val);
 
 	List<Recipe> fetchRecipesByIngredients(String val);
+
+	void updateRecipe(Recipe recipe);
+//	Void addRecipe(Recipe recipe);
 }

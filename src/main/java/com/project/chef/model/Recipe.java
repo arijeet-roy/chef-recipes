@@ -9,6 +9,16 @@ public class Recipe {
 	private String imageUrl;
 	private int rating;
 	private String userName;
+	private int numOfRatings;
+	
+
+	public int getNumOfRatings() {
+		return numOfRatings;
+	}
+
+	public void setNumOfRatings(int numOfRatings) {
+		this.numOfRatings = numOfRatings;
+	}
 
 	public String getUserName() {
 		return userName;

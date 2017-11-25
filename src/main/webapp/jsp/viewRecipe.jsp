@@ -32,39 +32,35 @@
 
 						<div class="panel-body">
 
-							<form:form id="recipeForm" modelAttribute="recipe"
-								action="addRecipe" method="post">
+							<form:form id="recipeUpdateForm" modelAttribute="recipe"
+								action="updateRecipe" method="post">
 
 								<div class="form-group">
-									<form:label path="recipeName">${recipe.recipeName}</form:label>
+									<form:label path="recipeName">Recipe name</form:label>
 									<form:input class="form-control" path="recipeName"
-										name="recipeName" id="recipeName" value="${recipe.recipeName}" />
+										name="recipeName" id="recipeName" readonly="true"/>
 								</div>
 
 								<div class="form-group">
 									<form:label path="recipeType">Recipe type</form:label>
 									<form:input class="form-control" path="recipeType"
-										name="recipeType" id="recipeType" />
+										name="recipeType" id="recipeType" readonly="true"/>
 								</div>
 
 
 								<div class="form-group">
-									<form:label path="ingredients">Add Ingredients</form:label>
+									<form:label path="ingredients">Ingredients</form:label>
 									<form:textarea rows="5" cols="30" class="form-control"
-										path="ingredients" name="ingredients" id="ingredients" />
+										path="ingredients" name="ingredients" id="ingredients" readonly="true"/>
 								</div>
 
 								<div class="form-group">
 									<form:label path="description">Description</form:label>
 									<form:textarea rows="5" cols="30" class="form-control"
-										path="description" name="description" id="description" />
+										path="description" name="description" id="description" readonly="true"/>
 								</div>
 
-								<div class="form-group">
-									<form:label path="imageUrl">Image</form:label>
-									<form:input class="form-control" path="imageUrl"
-										name="imageUrl" id="imageUrl" />
-								</div>
+					
 
 								<div class="form-group">
 									<form:label path="rating">Rating</form:label>

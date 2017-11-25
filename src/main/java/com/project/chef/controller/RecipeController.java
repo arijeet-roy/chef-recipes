@@ -28,7 +28,7 @@ import com.project.chef.service.RecipeService;
 @Configuration
 @ComponentScan(basePackages = { "com.project.chef.controller" })
 @Controller
-public class RecipeController extends WebMvcConfigurerAdapter{
+public class RecipeController extends WebMvcConfigurerAdapter {
 
 	public RecipeController() {
 		// TODO Auto-generated constructor stub
@@ -38,16 +38,19 @@ public class RecipeController extends WebMvcConfigurerAdapter{
 	public AccountService accountService;
 	@Autowired
 	RecipeService recipeService;
+	int previousRating;
+	int numOfRatings;
 
 	@Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-    }
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+	}
+
 	@RequestMapping(value = "/recipe", method = RequestMethod.GET)
 	public ModelAndView showSignUp(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView("recipe");
-		modelAndView.addObject("recipe", new Recipe());				
+		modelAndView.addObject("recipe", new Recipe());
 		return modelAndView;
 	}
 
@@ -56,24 +59,47 @@ public class RecipeController extends WebMvcConfigurerAdapter{
 		ModelAndView modelAndView = new ModelAndView("viewRecipe");
 		String recipeName = request.getParameter("recipeName");
 		List<Recipe> recipes = recipeService.fetchAllRecipes();
-		for(Recipe recipe:recipes) {
-			if(recipe.getRecipeName().equalsIgnoreCase(recipeName)) {
-				modelAndView.addObject("recipe", recipe);				
+		for (Recipe recipe : recipes) {
+			if (recipe.getRecipeName().equalsIgnoreCase(recipeName)) {
+				modelAndView.addObject("recipe", recipe);
+				previousRating = recipe.getRating();
+				numOfRatings = recipe.getNumOfRatings();
 			}
 		}
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/addRecipe", method = RequestMethod.POST)
-	public ModelAndView addAccount(HttpServletRequest request, HttpServletResponse response,
+	public ModelAndView addRecipe(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute("recipe") Recipe recipe) {
 		ModelAndView modelAndView = null;
 		HttpSession session = request.getSession(true);
-		recipe.setUserName((String)session.getAttribute("sessionName"));
-		recipe.setRating(1);
+		recipe.setUserName((String) session.getAttribute("sessionName"));
+		recipe.setRating(0);
+		recipe.setNumOfRatings(0);
 		recipeService.addRecipe(recipe);
 		modelAndView = new ModelAndView("welcome");
-//		modelAndView.addObject("firstName", account.getFirstName());
+		// modelAndView.addObject("firstName", account.getFirstName());
+		List<Recipe> recipes = recipeService.fetchAllRecipes();
+		modelAndView.addObject("recipes", recipes);
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/updateRecipe", method = RequestMethod.POST)
+	public ModelAndView updateRecipe(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute("recipe") Recipe recipe) {
+		ModelAndView modelAndView = null;
+		HttpSession session = request.getSession(true);
+		recipe.setUserName((String) session.getAttribute("sessionName"));
+		int currentRating = recipe.getRating();
+		int previousTotRating = previousRating * numOfRatings;
+		numOfRatings++;
+		int currentAvgRating = (previousTotRating + currentRating) / numOfRatings;
+		recipe.setRating(currentAvgRating);
+		recipe.setNumOfRatings(numOfRatings);
+		recipeService.updateRecipe(recipe);
+		modelAndView = new ModelAndView("welcome");
+		// modelAndView.addObject("firstName", account.getFirstName());
 		List<Recipe> recipes = recipeService.fetchAllRecipes();
 		modelAndView.addObject("recipes", recipes);
 		return modelAndView;

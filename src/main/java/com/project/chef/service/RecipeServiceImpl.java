@@ -45,4 +45,17 @@ public class RecipeServiceImpl implements RecipeService{
 		recipeDao.addRecipe(recipe);
 	}
 
+	@Override
+	public void updateRecipe(Recipe recipe) {
+		// TODO Auto-generated method stub
+		recipeDao.updateRecipe(recipe);
+	}
+
+//	public void addNewRecipe(Recipe recipe) {
+//		 recipeDao.addRecipe(recipe);
+//		return;
+//	}
+	
+	
+
 }

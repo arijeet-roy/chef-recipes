@@ -24,13 +24,12 @@ public class RecipeDaoImpl implements RecipeDao {
 	public void addRecipe(Recipe recipe) {
 		// TODO Auto-generated method stub
 		String addRecipeQuery = "insert into recipe(`recipeName`, `recipeType`, `ingredients`, `description`, `imageUrl`, "
-				+ "`rating`, `userName`) values(?,?,?,?,?,?,?)";
-		System.out.println(recipe.getRating() + " " + recipe.getUserName());
-		// jdbcTemplate.update(addRecipeQuery,
-		// new Object[] { recipe.getRecipeName(), recipe.getRecipeType(),
-		// recipe.getIngredients(),
-		// recipe.getDescription(), recipe.getImageUrl(), recipe.getRating(),
-		// recipe.getUserName() });
+				+ "`rating`, `numOfRatings`, `userName`) values(?,?,?,?,?,?,?,?)";
+//		System.out.println(recipe.getRating() + " " + recipe.getUserName());
+		jdbcTemplate.update(addRecipeQuery,
+				new Object[] { recipe.getRecipeName(), recipe.getRecipeType(), recipe.getIngredients(),
+						recipe.getDescription(), recipe.getImageUrl(), recipe.getRating(), recipe.getNumOfRatings(),
+						recipe.getUserName() });
 	}
 
 	public List<Recipe> fetchAllRecipes() {
@@ -63,5 +62,25 @@ public class RecipeDaoImpl implements RecipeDao {
 		List<Recipe> recipes = jdbcTemplate.query(validateQuery, new RecipeMapper());
 		return recipes.size() > 0 ? recipes : null;
 	}
+
+	@Override
+	public void updateRecipe(Recipe recipe) {
+		// TODO Auto-generated method stub
+		String updateRecipeQuery = "update recipe set rating = ?, numOfRatings = ? where recipeName = ?";
+		jdbcTemplate.update(updateRecipeQuery,
+				new Object[] { recipe.getRating(), recipe.getNumOfRatings(), recipe.getRecipeName() });
+
+	}
+
+	// public Void addRecipe(Recipe recipe) {
+	// String str = "Insert into recipe
+	// (recipeName,recipeType,ingredients,description,imageUrl,rating)
+	// values('"+
+	// recipe.getRecipeName()+"','"+recipe.getRecipeType()+"','"+recipe.getIngredients()
+	// +"','"+ recipe.getDescription()
+	// +"','"+recipe.getImageUrl()+"',0)";
+	// jdbcTemplate.execute(str);
+	// return null;
+	// }
 
 }
