@@ -8,25 +8,8 @@ public class Recipe {
 	private String description;
 	private String imageUrl;
 	private int rating;
-	private String userName;
 	private int numOfRatings;
-	
-
-	public int getNumOfRatings() {
-		return numOfRatings;
-	}
-
-	public void setNumOfRatings(int numOfRatings) {
-		this.numOfRatings = numOfRatings;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+	private String userName;
 
 	public Recipe() {
 		// TODO Auto-generated constructor stub
@@ -80,11 +63,27 @@ public class Recipe {
 		this.rating = rating;
 	}
 
+	public int getNumOfRatings() {
+		return numOfRatings;
+	}
+
+	public void setNumOfRatings(int numOfRatings) {
+		this.numOfRatings = numOfRatings;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	@Override
 	public String toString() {
 		return "Recipe [recipeName=" + recipeName + ", recipeType=" + recipeType + ", ingredients=" + ingredients
-				+ ", description=" + description + ", imageUrl=" + imageUrl + ", rating=" + rating + ", userName="
-				+ userName + "]";
+				+ ", description=" + description + ", imageUrl=" + imageUrl + ", rating=" + rating + ", numOfRatings="
+				+ numOfRatings + ", userName=" + userName + "]";
 	}
 
 }

@@ -50,7 +50,17 @@ public class RecipeController extends WebMvcConfigurerAdapter {
 	@RequestMapping(value = "/recipe", method = RequestMethod.GET)
 	public ModelAndView showSignUp(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView("recipe");
-		modelAndView.addObject("recipe", new Recipe());
+		String recipeName = request.getParameter("recipeName");
+		if (recipeName != null && !recipeName.isEmpty()) {
+			List<Recipe> recipes = recipeService.fetchAllRecipes();
+			for (Recipe recipe : recipes) {
+				if (recipe.getRecipeName().equalsIgnoreCase(recipeName)) {
+					modelAndView.addObject("recipe", recipe);
+				}
+			}
+		} else {
+			modelAndView.addObject("recipe", new Recipe());
+		}
 		return modelAndView;
 	}
 
@@ -64,6 +74,19 @@ public class RecipeController extends WebMvcConfigurerAdapter {
 				modelAndView.addObject("recipe", recipe);
 				previousRating = recipe.getRating();
 				numOfRatings = recipe.getNumOfRatings();
+			}
+		}
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/deleteRecipe", method = RequestMethod.GET)
+	public ModelAndView deleteRecipe(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView modelAndView = new ModelAndView("deleteRecipe");
+		String recipeName = request.getParameter("recipeName");
+		List<Recipe> recipes = recipeService.fetchAllRecipes();
+		for (Recipe recipe : recipes) {
+			if (recipe.getRecipeName().equalsIgnoreCase(recipeName)) {
+				modelAndView.addObject("recipe", recipe);
 			}
 		}
 		return modelAndView;
@@ -105,4 +128,16 @@ public class RecipeController extends WebMvcConfigurerAdapter {
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/deleteRecipe", method = RequestMethod.POST)
+	public ModelAndView deleteRecipe(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute("recipe") Recipe recipe) {
+		ModelAndView modelAndView = null;
+		HttpSession session = request.getSession(true);
+		recipeService.deleteRecipe(recipe);
+		modelAndView = new ModelAndView("welcome");
+		// modelAndView.addObject("firstName", account.getFirstName());
+		List<Recipe> recipes = recipeService.fetchAllRecipes();
+		modelAndView.addObject("recipes", recipes);
+		return modelAndView;
+	}
 }

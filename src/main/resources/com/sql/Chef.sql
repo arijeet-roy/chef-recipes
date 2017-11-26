@@ -27,13 +27,13 @@ CREATE TABLE recipe
 		`rating`   int,
 		`numOfRatings`   int,
 		`userName`  VARCHAR(45) NOT NULL,
-	CONSTRAINT recipeId_pk PRIMARY KEY (`recipeId`) 
+	CONSTRAINT recipeId_pk PRIMARY KEY (`recipeId`), 
 	CONSTRAINT userId_fk FOREIGN KEY (`userName`) REFERENCES accounts(`userName`)
 )
 
---INSERT INTO accounts VALUES ('arijeet','1234','arijeet', null, null, null, null, null);
+INSERT INTO accounts VALUES ('a','a','a', null, null, null, null, null);
 Insert into recipe (`recipeName`, `recipeType`, `ingredients`, `description`, `imageUrl`, 
-`rating`) values ('Outrageous Warm Chicken Nacho Dip', 'Appetizers and Snacks', 
+`rating`, `numOfRatings`, `userName`) values ('Outrageous Warm Chicken Nacho Dip', 'Appetizers and Snacks', 
 'diced tomatoes, processed cheese, chicken meat, sour cream, green onion, taco seasoning, jalapeno pepper', 
 'This is a jazzed up version of classic queso dip taken to a heartier level, perfect for 
 football games, tailgating or for taking along to pot lucks in a slow cooker! This is a 
@@ -43,7 +43,7 @@ with the addition of jalapenos to taste.', 'http://images.media-allrecipes.com/u
 5, 1, 'a');
 
 Insert into recipe (`recipeName`, `recipeType`, `ingredients`, `description`, `imageUrl`, 
-`rating`) values ('Mediterranean Chicken', 'World Cuisine', 
+`rating`, `numOfRatings`, `userName`) values ('Mediterranean Chicken', 'World Cuisine', 
 'Sauteed chicken, tomatoes, olives, white wine, garlic, and herbs.', 
 'This recipe is from The WEBB Cooks, articles and recipes by Robyn Webb, courtesy of the 
 American Diabetes Association. Preparation time: 20 minutes. Sauteed chicken simmered in
@@ -52,7 +52,7 @@ American Diabetes Association. Preparation time: 20 minutes. Sauteed chicken sim
 4, 1, 'a');
 
 Insert into recipe (`recipeName`, `recipeType`, `ingredients`, `description`, `imageUrl`, 
-`rating`) values ('Blueberry Sour Cream Coffee Cake', 'Desserts', 
+`rating`, `numOfRatings`, `userName`) values ('Blueberry Sour Cream Coffee Cake', 'Desserts', 
 'Butter, blueberries, sugar, cinnamon, pecans, sour cream and vanilla extract.', 
 'One really delicious and really unhealthy Sunday coffee cake. The author has no idea where 
 she got this recipe from but it was about thirty years ago and has been a family favorite since. 

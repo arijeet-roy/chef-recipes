@@ -63,25 +63,26 @@
 
 								<tr>
 									<a style="color: white;" href="viewRecipe?recipe=${recipe}">
-									<td><img src="${recipe.imageUrl}"
-										style="width: 304px; height: 204px;" /></td>
-									<td>Recipe Name: <c:out value="${recipe.recipeName}" /></td>
-									<td>Recipe Type: <c:out value="${recipe.recipeType}" /></td>
-									<td>Ingredients: <c:out value="${recipe.ingredients}" /></td>
-									<td>Description: <c:out value="${recipe.description}" /></td>
-									<td>Rating: <c:out value="${recipe.rating}" /></td>
-									<c:choose>
-										<c:when test="${recipe.userName == sessionName}">
-											<td><button>
-													<a href="recipe">Edit</a></td>
+										<td><img src="${recipe.imageUrl}"
+											style="width: 304px; height: 204px;" /></td>
+										<td>Recipe Name: <c:out value="${recipe.recipeName}" /></td>
+										<td>Recipe Type: <c:out value="${recipe.recipeType}" /></td>
+										<td>Ingredients: <c:out value="${recipe.ingredients}" /></td>
+										<td>Description: <c:out value="${recipe.description}" /></td>
+										<td>Rating: <c:out value="${recipe.rating}" /></td> <c:choose>
+											<c:when test="${recipe.userName == sessionName}">
+												<td><button>
+														<a href="recipe?recipeName=${recipe.recipeName}">Edit</a></td>
+												<td><button>
+														<a href="deleteRecipe?recipeName=${recipe.recipeName}">Delete</a></td>
 
-										</c:when>
-										<c:otherwise>
-											<td><button>
-													<a href="viewRecipe?recipeName=${recipe.recipeName}">View/Rate</a></td>
+											</c:when>
+											<c:otherwise>
+												<td><button>
+														<a href="viewRecipe?recipeName=${recipe.recipeName}">View/Rate</a></td>
 
-										</c:otherwise>
-									</c:choose>
+											</c:otherwise>
+										</c:choose>
 								</tr>
 
 							</c:forEach>
